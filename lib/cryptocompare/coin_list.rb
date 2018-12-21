@@ -68,8 +68,10 @@ module Cryptocompare
     #     },
     #     "Type" => 100
     #   }
-    def self.all
-      api_resp = Faraday.get(API_URL)
+    def self.all(opts={})
+      full_path = QueryParamHelper.set_query_params(API_URL, opts)
+
+      api_resp = Faraday.get(full_path)
       JSON.parse(api_resp.body)
     end
   end
